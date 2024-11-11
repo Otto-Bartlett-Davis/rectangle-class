@@ -1,0 +1,36 @@
+import pygame
+pygame.init()
+screen = pygame.display.set_mode((600,600))
+screen.fill((255,255,255))
+blue = (0,0,255)
+red = (255,0,0)
+mousepos = pygame.mouse.get_pos
+pygame.display.update()
+
+class Rect():
+    def __init__(self,color,pos,length,width):
+        self.rect_color = color
+        self.rect_pos = pos
+        self.rect_length = length
+        self.rect_width = width
+        self.rect_surface = screen
+
+    def draw(self):
+        self.draw_Rect = pygame.draw.rect(self.rect_surface, self.rect_color, self.rect_pos, self.rect_length, self.rect_width)
+
+    def grow(self,r):
+        self.rect_length = self.rect_length+r
+        self.draw_Rect = pygame.draw.rect(self.rect_surface, self.rect_color, self.rect_pos, self.rect_length, self.rect_width)
+
+circle=Rect(blue, (mousepos),25,0)
+while 1:
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            screen.fill((255,255,255))
+            circle.draw()
+            mousepos = pygame.mouse.get_pos
+            pygame.display.update()
+        elif event.type == pygame.MOUSEBUTTONUP:
+            screen.fill((255,255,255))
+            circle.grow(20)
+            pygame.display.update()
